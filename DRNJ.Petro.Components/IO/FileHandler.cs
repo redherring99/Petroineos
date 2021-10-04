@@ -74,30 +74,6 @@ namespace DRNJ.Petro.Components.IO
         }
 
 
-        public void WriteCsvOrig(string fileName, List<double> tradeInfo)
-        {
-            using (var Writer = new StreamWriter(fileName))
-            {
-                //--------------------
-                // Write header      |      
-                //--------------------
-
-                Writer.WriteLine("Local Time, Volume");
-                Logger.LogDebug("Local Time, Volume");
-                //----------------------------------
-                // Write Data - assumption is that |
-                // list is in "hour" order         |
-                //----------------------------------
-
-                for (int period = 0; period < 24; period++)
-                {
-                    var data = string.Format("{0}, {1}", this.CreateLocalTimeString(period), tradeInfo[period]);
-                    Logger.LogDebug(data);
-                    Writer.WriteLine(data);
-                }
-            }
-        }
-
         #endregion
 
         #region Protected Methods
