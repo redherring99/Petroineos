@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DRNJ.LoggerExtensions\DRNJ.LoggerExtensions.csproj" />
     <ProjectReference Include="..\DRNJ.Petro.Components\DRNJ.Petro.Components.csproj" />
   </ItemGroup>
 

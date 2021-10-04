@@ -20,10 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.txt = README.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{C7F0FE7A-3DEF-4B9B-8133-A1D327EFFE16}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DRNJ.LoggerExtensions", "DRNJ.LoggerExtensions\DRNJ.LoggerExtensions.csproj", "{B4B642D9-2A70-4832-85D2-A6694564EFFF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,10 +38,6 @@ Global
 		{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4B642D9-2A70-4832-85D2-A6694564EFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4B642D9-2A70-4832-85D2-A6694564EFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4B642D9-2A70-4832-85D2-A6694564EFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4B642D9-2A70-4832-85D2-A6694564EFFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,7 +46,6 @@ Global
 		{131E9575-424B-4ADA-8652-912E2710E10A} = {77B59541-4061-4D3D-8487-E2CE96B94A3E}
 		{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A} = {CB9119D0-E7B9-4264-B67F-0C394345C019}
 		{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5} = {912E6AE4-27AD-4589-9F7C-11BD3456E0B9}
-		{B4B642D9-2A70-4832-85D2-A6694564EFFF} = {C7F0FE7A-3DEF-4B9B-8133-A1D327EFFE16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BFADA7A-E0DC-4030-B2FE-78B0C278E186}

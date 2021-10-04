@@ -4,9 +4,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DRNJ.LoggerExtensions;
 
 namespace DRNJ.Petro.Components.Aggregator
 {
@@ -84,7 +82,7 @@ namespace DRNJ.Petro.Components.Aggregator
 
         public async Task Start(DateTime startTime)
         {
-            this.Logger.LogDebugMsg("Starting Aggregator for Time: {0}", startTime);
+            this.Logger.LogDebug("Starting Aggregator for Time: {0}", startTime);
 
             //-------------------------------------
             // Get Data                           |
@@ -112,7 +110,7 @@ namespace DRNJ.Petro.Components.Aggregator
 
         protected async Task<IEnumerable<PowerTrade>> GetTradesAsync(DateTime time)
         {
-            this.Logger.LogDebugMsg("Getting Trades for Time: {0}", time);
+            this.Logger.LogDebug("Getting Trades for Time: {0}", time);
             return await this.thePowerService.GetTradesAsync(time);
         }
 
@@ -125,7 +123,7 @@ namespace DRNJ.Petro.Components.Aggregator
         /// <returns></returns>
         protected List<double> AggregateResults(IEnumerable<PowerTrade> trades)
         {
-            this.Logger.LogDebugMsg("Calculating Sums ");
+            this.Logger.LogDebug("Calculating Sums ");
 
             List<double> volume = new List<double>();
 
@@ -152,7 +150,7 @@ namespace DRNJ.Petro.Components.Aggregator
             // Write the data                                      |
             //------------------------------------------------------
 
-            this.Logger.LogDebugMsg("Writing data to file: {n}",fullFileName); 
+            this.Logger.LogDebug("Writing data to file: {n}",fullFileName); 
 
             this.fileWriter.WriteCsv(fullFileName, data);
 

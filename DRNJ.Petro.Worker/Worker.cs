@@ -1,11 +1,7 @@
-using DRNJ.LoggerExtensions;
-using DRNJ.Petro.Components;
 using DRNJ.Petro.Components.Aggregator;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,10 +22,10 @@ namespace DRNJ.Petro.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogDebugMsg("Starting up");
+            _logger.LogDebug("Starting up");
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInfoMsg("Worker running at: {time}", DateTimeOffset.Now);
+                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await this.Aggregator.Start(DateTime.Now);
                 //------------------------------------------------
                 // Wait poll interval minutes - Calculated in mS |

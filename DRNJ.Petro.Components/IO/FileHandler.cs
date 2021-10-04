@@ -1,9 +1,6 @@
-﻿using DRNJ.LoggerExtensions;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DRNJ.Petro.Components.IO
 {
@@ -55,7 +52,7 @@ namespace DRNJ.Petro.Components.IO
             //---------------------------------
 
             StreamWrapper.WriteLine("Local Time, Volume");
-            Logger.LogDebugMsg("Local Time, Volume");
+            Logger.LogDebug("Local Time, Volume");
 
             //----------------------------------
             // Write Data - assumption is that |
@@ -65,7 +62,7 @@ namespace DRNJ.Petro.Components.IO
             for (int period = 0; period < 24; period++)
             {
                 var data = string.Format("{0},{1}", this.CreateLocalTimeString(period), tradeInfo[period]);
-                Logger.LogDebugMsg(data);
+                Logger.LogDebug(data);
                 StreamWrapper.WriteLine(data);
             }
 
@@ -86,7 +83,7 @@ namespace DRNJ.Petro.Components.IO
                 //--------------------
 
                 Writer.WriteLine("Local Time, Volume");
-                Logger.LogDebugMsg("Local Time, Volume");
+                Logger.LogDebug("Local Time, Volume");
                 //----------------------------------
                 // Write Data - assumption is that |
                 // list is in "hour" order         |
@@ -95,7 +92,7 @@ namespace DRNJ.Petro.Components.IO
                 for (int period = 0; period < 24; period++)
                 {
                     var data = string.Format("{0}, {1}", this.CreateLocalTimeString(period), tradeInfo[period]);
-                    Logger.LogDebugMsg(data);
+                    Logger.LogDebug(data);
                     Writer.WriteLine(data);
                 }
             }
