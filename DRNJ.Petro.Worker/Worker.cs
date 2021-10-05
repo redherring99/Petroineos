@@ -31,7 +31,7 @@ namespace DRNJ.Petro.Worker
                 try
                 {
                     _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
+                    _logger.LogDebug("Debug message");
                     await this.Aggregator.Start(DateTime.Now);
 
                     //------------------------------------------------
