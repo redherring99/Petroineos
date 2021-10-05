@@ -84,23 +84,39 @@ namespace DRNJ.Petro.Components.Aggregator
         {
             this.Logger.LogDebug("Starting Aggregator for Time: {0}", startTime);
 
-            //-------------------------------------
-            // Get Data                           |
-            //-------------------------------------
+            //--------------------------------------
+            // Crude error handling - no retry etc |
+            //--------------------------------------
+            try
+            {
 
-            var trades = await this.GetTradesAsync(startTime);
 
-            //-------------------------------------
-            // Aggregate the results              |
-            //-------------------------------------
+                //-------------------------------------
+                // Get Data                           |
+                //-------------------------------------
 
-            var aggre = this.AggregateResults(trades);
+                var trades = await this.GetTradesAsync(startTime);
 
-            //-------------------------------------
-            // Write results to a file            |
-            //-------------------------------------
+                //-------------------------------------
+                // Aggregate the results              |
+                //-------------------------------------
 
-            this.WriteDataToFile(startTime, aggre);
+                var aggre = this.AggregateResults(trades);
+
+                //-------------------------------------
+                // Write results to a file            |
+                //-------------------------------------
+
+                this.WriteDataToFile(startTime, aggre);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex, "Exception occurred");
+                //--------------------------
+                // Bubble up the exception |
+                //--------------------------
+                throw ex;
+            }
         }
 
 

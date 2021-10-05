@@ -15,7 +15,7 @@ namespace DRNJ.Petro.Worker
         public Worker(ILogger<Worker> logger, IAggregator aggregator, int pollInterval)
         {
             this._logger = logger;
-            this.Aggregator= aggregator;
+            this.Aggregator = aggregator;
             this.PollIntervalInMinutes = pollInterval;
 
         }
@@ -25,12 +25,27 @@ namespace DRNJ.Petro.Worker
             _logger.LogDebug("Starting up");
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await this.Aggregator.Start(DateTime.Now);
-                //------------------------------------------------
-                // Wait poll interval minutes - Calculated in mS |
-                //------------------------------------------------
-                await Task.Delay(PollIntervalInMinutes * 60 * 1000, stoppingToken);
+                //--------------------------------
+                // Only basic exception handling |
+                //--------------------------------
+                try
+                {
+                    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+
+                    await this.Aggregator.Start(DateTime.Now);
+
+                    //------------------------------------------------
+                    // Wait poll interval minutes - Calculated in mS |
+                    //------------------------------------------------
+                    await Task.Delay(PollIntervalInMinutes * 60 * 1000, stoppingToken);
+
+                }
+                catch (Exception ex)
+                {
+                    this._logger.LogError(ex, "Worker Exception");
+                    throw ex;
+                }
+
             }
         }
     }
