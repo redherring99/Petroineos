@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DRNJ.Petro.Components\DRNJ.Petro.Components.csproj" />
-    <ProjectReference Include="..\DRNJ.Petro.Worker\DRNJ.Petro.Worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>

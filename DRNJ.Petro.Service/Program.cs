@@ -2,7 +2,6 @@ using DRNJ.Petro.Components.Aggregator;
 using DRNJ.Petro.Components.IO;
 using DRNJ.Petro.Service;
 using DRNJ.Petro.Service.Configuration;
-using DRNJ.Petro.Worker;
 using Microsoft.Extensions.Logging.Configuration;
 using Microsoft.Extensions.Logging.EventLog;
 using Services;
