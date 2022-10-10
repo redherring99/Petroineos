@@ -24,7 +24,7 @@ using Services;
 IHost host = Host.CreateDefaultBuilder(args)
         .UseWindowsService(options =>
         {
-            options.ServiceName = "DJ Aggregator Service7";
+            options.ServiceName = "DJ Aggregator Service";
         })
     .ConfigureLogging((context, logging) =>
     {
