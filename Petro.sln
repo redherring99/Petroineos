@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DRNJ.Petro.Worker", "DRNJ.Petro.Worker\DRNJ.Petro.Worker.csproj", "{131E9575-424B-4ADA-8652-912E2710E10A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DRNJ.Petro.Components", "DRNJ.Petro.Components\DRNJ.Petro.Components.csproj", "{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DRNJ.Petro.UnitTest", "DRNJ.Petro.UnitTest\DRNJ.Petro.UnitTest.csproj", "{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5}"
@@ -28,10 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{131E9575-424B-4ADA-8652-912E2710E10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{131E9575-424B-4ADA-8652-912E2710E10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{131E9575-424B-4ADA-8652-912E2710E10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{131E9575-424B-4ADA-8652-912E2710E10A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,7 +43,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{131E9575-424B-4ADA-8652-912E2710E10A} = {77B59541-4061-4D3D-8487-E2CE96B94A3E}
 		{F96E8AB4-E6B6-4BB4-810D-01E8DB24385A} = {CB9119D0-E7B9-4264-B67F-0C394345C019}
 		{4D83EA4B-F10F-4554-B54C-16F9B7B58BD5} = {912E6AE4-27AD-4589-9F7C-11BD3456E0B9}
 		{ECB6F1C9-DE19-4DD8-9AD7-7188DFC56950} = {77B59541-4061-4D3D-8487-E2CE96B94A3E}
