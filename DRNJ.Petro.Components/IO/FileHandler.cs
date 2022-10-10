@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DRNJ.Petro.Components.IO
 {
@@ -12,6 +13,8 @@ namespace DRNJ.Petro.Components.IO
     public interface IFileHandler
     {
         void WriteCsv(string filename, IList<PowerPeriod> tradeInfo);
+
+        Task WriteCsvAsync(string fileName, IList<PowerPeriod> tradeInfo);
 
     }
 
@@ -80,6 +83,44 @@ namespace DRNJ.Petro.Components.IO
         }
 
 
+        public async Task WriteCsvAsync(string fileName, IList<PowerPeriod> tradeInfo)
+        {
+            //---------------------------------
+            // Order the data                 |
+            //---------------------------------
+
+            var orderedData = tradeInfo.OrderBy(a => a.Period);
+            //---------------------------------
+            // Open File                      |
+            //---------------------------------
+
+            StreamWrapper.OpenFile(fileName);
+
+            //---------------------------------
+            // Write header                   |      
+            //---------------------------------
+
+            await StreamWrapper.WriteLineAsync("Local Time, Volume");
+            this.Logger.LogWarning("Local Time, Volume");
+
+            //----------------------------------
+            // Write Data - assumption is that |
+            // list is in "hour" order         |
+            //----------------------------------
+
+            foreach (var item in orderedData)
+            {
+                var data = string.Format("{0},{1}", this.CreateLocalTimeString(item.Period), item.Volume);
+                this.Logger.LogWarning(data);
+                await StreamWrapper.WriteLineAsync(data);
+            }
+
+            //---------------------------------
+            // Close + Dispose of stream      |
+            //---------------------------------
+            StreamWrapper.CloseFile();
+
+        }
 
         #endregion
 

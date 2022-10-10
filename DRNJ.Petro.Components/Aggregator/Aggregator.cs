@@ -76,7 +76,7 @@ namespace DRNJ.Petro.Components.Aggregator
             // Write results to a file            |
             //-------------------------------------
 
-            this.WriteDataToFile(startTime, aggre);
+             this.WriteDataToFile(startTime, aggre);
         }
 
 
@@ -132,6 +132,25 @@ namespace DRNJ.Petro.Components.Aggregator
             this.Logger.LogWarning("Writing data to file: {n}",fileName); 
 
             this.fileWriter.WriteCsv(fileName, data);
+
+        }
+
+        protected async Task WriteDataToFileAsync(DateTime startTime, IList<PowerPeriod> data)
+        {
+            //------------------------------------------------------
+            // Calculate file name                                 |
+            // Using string.Format instead of string interpolation |
+            //------------------------------------------------------
+
+            string fileName = String.Format("{0}\\PowerPosition_{1:yyyyMMdd_HHmm}.csv", this.FilePath, startTime);
+
+            //------------------------------------------------------
+            // Write the data                                      |
+            //------------------------------------------------------
+
+            this.Logger.LogWarning("Writing data to file: {n}", fileName);
+
+            await this.fileWriter.WriteCsvAsync(fileName, data);
 
         }
 

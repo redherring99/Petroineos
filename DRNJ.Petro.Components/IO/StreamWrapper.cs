@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DRNJ.Petro.Components.IO
 {
@@ -10,6 +11,7 @@ namespace DRNJ.Petro.Components.IO
         void OpenFile(string fileName);
         void CloseFile();
         void WriteLine(string s);
+        Task WriteLineAsync(string s);
     }
 
     public class StreamWrapper : IStreamWrapper
@@ -30,5 +32,12 @@ namespace DRNJ.Petro.Components.IO
         {
             Writer.WriteLine(s);
         }
+
+
+        public async Task WriteLineAsync(string s)
+        {
+            await Writer.WriteLineAsync(s);
+        }
+
     }
 }
