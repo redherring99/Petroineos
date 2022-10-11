@@ -15,6 +15,13 @@ Because of limited time ( I have taken a simple approach to "scheduling" the agg
 the main Worker "loop".
 The simple approach "fires off" a Task to do the aggreation at the specified time then waits for the time interval 
 
+EVENT LOGGING
+=============
+
+Logging goes to System Event Log - I could have used Serilog etc but EventLog seemed the simplest for this demo
+I have implemented try/catch for aggregator - with also some Rx event throttling to avoid a storm in the event log for exceptions
+Further work would add this to other logg messages, also could add configuration of the throttling to appsettings - TODO
+
 TESTING
 ========
 Testing - I've used XUnit but could use NUnit or MS-Test
