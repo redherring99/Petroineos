@@ -4,6 +4,7 @@ using DRNJ.Petro.Service;
 using DRNJ.Petro.Service.Configuration;
 using Microsoft.Extensions.Logging.Configuration;
 using Microsoft.Extensions.Logging.EventLog;
+using Serilog;
 using Services;
 
 /// <summary>
@@ -21,26 +22,30 @@ using Services;
 /// </summary>
 
 IHost host = Host.CreateDefaultBuilder(args)
-        .UseWindowsService(options =>
-        {
-            options.ServiceName = "DJ Aggregator Service";
-        })
-    .ConfigureLogging((context, logging) =>
+    .UseSerilog()
+    .UseWindowsService(options =>
     {
-        // See: https://github.com/dotnet/runtime/issues/47303
-        logging.AddConfiguration(
-            context.Configuration.GetSection("Logging"));
+        options.ServiceName = "DJ Aggregator Service";
     })
-    .ConfigureServices( (hostContext, services) =>
+    //.ConfigureLogging((context, logging) =>
+    //{
+    //    // See: https://github.com/dotnet/runtime/issues/47303
+    //    logging.AddConfiguration(
+    //        context.Configuration.GetSection("Logging"));
+    //})
+    .ConfigureServices((hostContext, services) =>
     {
-        LoggerProviderOptions.RegisterProviderOptions<
-            EventLogSettings, EventLogLoggerProvider>(services);
+        //LoggerProviderOptions.RegisterProviderOptions<
+        //    EventLogSettings, EventLogLoggerProvider>(services);
+        Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(hostContext.Configuration).CreateLogger();
+
+        Log.Logger.Information("Hello DJ");
 
         //-----------------------------------------------------------------------
         // Get Info from Config File                                            |
         //-----------------------------------------------------------------------
-        int pollInterval =  hostContext.Configuration.Get<int>("PollInterval");
-        string csvPath =   hostContext.Configuration.Get<string>("CSVPath");
+        int pollInterval = hostContext.Configuration.Get<int>("PollInterval");
+        string csvPath = hostContext.Configuration.Get<string>("CSVPath");
 
         //-----------------------------------------------------------------------
         // Configure DI                                                         |
