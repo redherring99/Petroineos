@@ -1,7 +1,11 @@
-using DRNJ.Petro.Components.Aggregator;
+using DRNJ.Petro.Components.Aggregate;
 
 namespace DRNJ.Petro.Service;
 
+
+/// <summary>
+/// Background service - boilerplate code
+/// </summary>
 public class WindowsBackgroundService : BackgroundService
 {
     private readonly ILogger<WindowsBackgroundService> _logger;
@@ -16,6 +20,11 @@ public class WindowsBackgroundService : BackgroundService
 
     }
 
+    /// <summary>
+    /// Main method - infinite loop firing off worker then sleeping for poll interval
+    /// </summary>
+    /// <param name="stoppingToken"></param>
+    /// <returns></returns>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         try
@@ -40,7 +49,7 @@ public class WindowsBackgroundService : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{Message}", ex.Message);
+            _logger.LogError(ex, "Fatal Error in Windows Service. Service will Terminate. Error : {Message}", ex.Message);
 
             // Terminates this process and returns an exit code to the operating system.
             // This is required to avoid the 'BackgroundServiceExceptionBehavior', which

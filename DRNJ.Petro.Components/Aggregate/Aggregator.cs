@@ -1,4 +1,5 @@
-﻿using DRNJ.Petro.Components.IO;
+﻿using DRNJ.Petro.Components.Error;
+using DRNJ.Petro.Components.IO;
 using Microsoft.Extensions.Logging;
 using Services;
 using System;
@@ -9,14 +10,8 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRNJ.Petro.Components.Aggregator
+namespace DRNJ.Petro.Components.Aggregate
 {
-    public interface IAggregator
-    {
-        Task Start(DateTime startTime);
-    }
-
-
     /// <summary>
     /// Aggregator class
     /// 
@@ -84,7 +79,7 @@ namespace DRNJ.Petro.Components.Aggregator
             this.ErrorMessageThrottleQueue = new Subject<ErrorMessage>();
 
             //----------------------------------------------------------------------------------------------------------------
-            // GetLifting first event immediately then wait and ignore subsequent for time span                                     |
+            // Get first event immediately then wait and ignore subsequent for time span                                     |
             // https://stackoverflow.com/questions/7999503/rx-how-can-i-respond-immediately-and-throttle-subsequent-requests |
             //----------------------------------------------------------------------------------------------------------------
             this.ErrorMessageThrottleQueue.Window(() => { return Observable.Interval(TimeSpan.FromSeconds(this.EventWindow)); })
@@ -124,6 +119,13 @@ namespace DRNJ.Petro.Components.Aggregator
 
         #region Public Methods
 
+        /// <summary>
+        /// Aggregator main method
+        /// Gets data, processes it
+        /// Reruns on exception as requirement is time period cannot be missed
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
         public async Task Start(DateTime startTime)
         {
             bool running = true;
@@ -135,7 +137,7 @@ namespace DRNJ.Petro.Components.Aggregator
             {
                 try
                 {
-                    await this.ExractData(startTime);
+                    await this.ProcessData(startTime);
                     running = false; // Done
                 }
                 catch (Exception ex)
@@ -148,9 +150,17 @@ namespace DRNJ.Petro.Components.Aggregator
             }
         }
 
-        public async Task ExractData(DateTime startTime)
+
+        /// <summary>
+        /// Process the data
+        ///     Get Data
+        ///     Aggregate
+        ///     Write to File
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
+        public async Task ProcessData(DateTime startTime)
         {
-            // TODO - Add throttling to avoid eventlog storm
             this.Logger.LogInformation("Starting Extract for Time: {0}", startTime);
 
             //-------------------------------------
@@ -171,7 +181,6 @@ namespace DRNJ.Petro.Components.Aggregator
 
             await this.WriteDataToFileAsync(startTime, aggre);
 
-            // TODO - Add throttling to avoid eventlog storm
             this.Logger.LogInformation("Extract for Time: {0} Complete", startTime);
         }
 
@@ -187,7 +196,7 @@ namespace DRNJ.Petro.Components.Aggregator
         /// <returns></returns>
         protected async Task<IEnumerable<PowerTrade>> GetTradesAsync(DateTime time)
         {
-            this.Logger.LogWarning("Getting Trades for Time: {0}", time);
+            this.Logger.LogInformation("Getting Trades for Time: {0}", time);
             return await this.thePowerService.GetTradesAsync(time);
         }
 
@@ -212,6 +221,11 @@ namespace DRNJ.Petro.Components.Aggregator
 
         }
 
+        /// <summary>
+        /// Write data to CSV File
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="data"></param>
         protected void WriteDataToFile(DateTime startTime, IList<PowerPeriod> data)
         {
             //------------------------------------------------------

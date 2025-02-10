@@ -1,4 +1,4 @@
-using DRNJ.Petro.Components.Aggregator;
+using DRNJ.Petro.Components.Aggregate;
 using DRNJ.Petro.Components.IO;
 using DRNJ.Petro.Service;
 using DRNJ.Petro.Service.Configuration;
@@ -33,8 +33,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices( (hostContext, services) =>
     {
-        LoggerProviderOptions.RegisterProviderOptions<
-            EventLogSettings, EventLogLoggerProvider>(services);
+        LoggerProviderOptions.RegisterProviderOptions<EventLogSettings, EventLogLoggerProvider>(services);
 
         //-----------------------------------------------------------------------
         // Get Info from Config File                                            |

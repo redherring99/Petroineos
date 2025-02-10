@@ -20,7 +20,7 @@ EVENT LOGGING
 
 Logging goes to System Event Log - I could have used Serilog etc but EventLog seemed the simplest for this demo
 I have implemented try/catch for aggregator - with also some Rx event throttling to avoid a storm in the event log for exceptions
-Further work would add this to other logg messages, also could add configuration of the throttling to appsettings - TODO
+Further work would add this to other log messages, also could add configuration of the throttling to appsettings - TODO
 
 TESTING
 ========
@@ -46,9 +46,8 @@ DEPENDENCY INJECTION
 ====================
 
 The modern approach is "programming by injection" rather than class derivation. I am not sure that I agree 100% with this approach as it
-can lead to "death by dependency injection"  where class constructors have a large number of items injected. Apparently the "mediator pattern"
-gets around this issue, however, I have not had time, so far, to investigate this pattern. So...I try to use class derivation where necessary
-and DI where necessary or a combination.
+can lead to "death by dependency injection"  where class constructors have a large number of items injected, I could use a mediator-pattern
+but don't feel that necessary here
 
 I have put the interfaces in the same files as the classes -really for expediency, but, of course, they could be in separate files or even
 a separate project
