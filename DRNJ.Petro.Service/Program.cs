@@ -22,28 +22,24 @@ using Services;
 /// </summary>
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .UseSerilog()
+    //.UseSerilog()
     .UseWindowsService(options =>
     {
         options.ServiceName = "DJ Aggregator Service";
     })
-    //.ConfigureLogging((context, logging) =>
-    //{
-    //    // See: https://github.com/dotnet/runtime/issues/47303
-    //    logging.AddConfiguration(
-    //        context.Configuration.GetSection("Logging"));
-    //})
+    .ConfigureLogging(options =>
+    {
+        options.AddFilter<EventLogLoggerProvider>(level => level >= LogLevel.Information);
+    }
+    )
     .ConfigureServices((hostContext, services) =>
     {
-<<<<<<< HEAD
-        LoggerProviderOptions.RegisterProviderOptions<EventLogSettings, EventLogLoggerProvider>(services);
-=======
-        //LoggerProviderOptions.RegisterProviderOptions<
-        //    EventLogSettings, EventLogLoggerProvider>(services);
-        Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(hostContext.Configuration).CreateLogger();
+        services.Configure<EventLogSettings>(config =>
+        {
+            config.LogName = "DJAggregator";
+            config.SourceName = "DJAggregator";
+        });
 
-        Log.Logger.Information("Hello DJ");
->>>>>>> db4408a03db7cbc9a5c45a3618ecc960302b73e6
 
         //-----------------------------------------------------------------------
         // Get Info from Config File                                            |
